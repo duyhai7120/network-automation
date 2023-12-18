@@ -1,0 +1,26 @@
+---
+- name: config backup of network devices
+  hosts: all
+  gather_facts: no
+  tasks:
+  - name: get timestamp
+    shell: "date +%Y%m%d-%H-%M-%S"
+    register: timestamp
+
+  - name: backup nxos config
+    nxos_config:
+            backup: yes
+            backup_options:
+                    filename: "running-config-{{ timestamp.stdout }}"
+                    dir_path: "data/{{ inventory_hostname }}"
+
+    when: ansible_network_os == 'nxos'
+  - name: backup nxos config
+    junos_config:
+            backup: yes
+            backup_options:
+                    filename: "running-config-{{ timestamp.stdout }}"
+                    dir_path: "data/{{ inventory_hostname }}"
+
+
+    when: ansible_network_os == 'junos'
