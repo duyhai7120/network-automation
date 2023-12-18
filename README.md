@@ -1,9 +1,9 @@
 # Network-automation
-Using Ansible Network Modules allow to easily perform Network Automation tasks such as sending the same commands to multiple devices and configuration management.
+This project demonstrate the use of Ansible Network Modules to easily perform Network Automation tasks such as configuration managment, test and validation of existing state and backups etc.
 These playbooks will run on CISCO NX-OS and Juniper switches.
 
 # Playbook info
-traceroute.yml runs traceroute command on CISCO NX-OS switch    
+config_vlan.yml configures the vlan on CISCO NX-OS switch. The playbook first check is the vlan exists, if it exists it does nothing. If it doesn't exists, it creates a vlan.   
 facts.yml gather facts on filesystems and memory on CISCO NX-OS and Juniper switches.
 backup.yml creates a seperate directory for each switch and stores backup file in it.
 
@@ -28,7 +28,8 @@ ansible_connection=ansible.netcommon.network_cli
 ansible_user=<Login_user>
 ansible_ssh_pass=<Login_password>
 ```
-
+If an inventory file doesn't exists, create a new one for example,
+vi /etc/ansible/hosts
 
 * Syntax check:
 ```
@@ -40,6 +41,5 @@ ansible-playbook traceroute.yml --syntax-check
 
 ansible-playbook facts.yml
 
-ansible-playbook traceroute.yml -e 'dest=ip_address'
-Example: ansible-playbook traceroute -e 'dest=10.64.6.100'
+ansible-playbook config_vlans.yml
 ```
