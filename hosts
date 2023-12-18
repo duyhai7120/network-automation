@@ -1,0 +1,23 @@
+[switches:children]
+cisco
+juniper
+
+[cisco]
+nxos ansible_host=105.66.46.250
+
+[juniper]
+junos_1 ansible_host=10.31.249.249
+junos_2 ansible_host=10.31.249.250
+
+[cisco:vars]
+ansible_network_os = nxos
+ansible_connection=ansible.netcommon.network_cli
+ansible_user=xxxx
+ansible_ssh_pass=xxxx
+
+[juniper:vars]
+ansible_network_os = junos
+ansible_connection = ansible.netcommon.netconf
+ansible_user=xxxx
+ansible_ssh_pass=xxxx
+
