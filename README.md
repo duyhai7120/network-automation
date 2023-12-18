@@ -3,9 +3,9 @@ This project demonstrate the use of Ansible Network Modules to easily perform Ne
 These playbooks will run on CISCO NX-OS and Juniper switches.
 
 # Playbook info
-* config_vlan.yml configures the vlan on CISCO NX-OS switch. The playbook first check is the vlan exists, if it exists it does nothing. If it doesn't exists, it creates a vlan.   
-* facts.yml gather facts on filesystems and memory on CISCO NX-OS and Juniper switches.
-* backup.yml creates a seperate directory for each switch and stores backup file in it.
++ config_vlan.yml configures the vlan on CISCO NX-OS switch. The playbook first check is the vlan exists, if it exists it does nothing. If it doesn't exists, it creates a vlan.   
++ facts.yml gather facts on filesystems and memory on CISCO NX-OS and Juniper switches.
++ backup.yml creates a seperate directory for each switch and stores backup file in it.
 
 # Required Ansible
 Ansible version required 2.10+
