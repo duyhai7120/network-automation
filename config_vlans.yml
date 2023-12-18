@@ -1,0 +1,33 @@
+---
+- name: Verify and create VLANs
+  hosts: nxos
+  gather_facts: no
+  vars:
+          vlan_id: 123
+          vlan_name: test
+  tasks:
+     - name: Get Nexus facts
+       nxos_facts:
+       register: data
+     - name: show results
+       debug:
+         msg:
+          - "VLANs: {{ data.ansible_facts.ansible_net_vlan_list }}"
+
+
+     - name: Create new VLANs 
+       nxos_vlan:
+               vlan_id: "{{ vlan_id }}"
+               name: "{{ vlan_name }}"
+               state: present
+       when:  (vlan_id| string) not in data.ansible_facts.ansible_net_vlan_list
+
+     - name: Get facts
+
+       nxos_facts:
+       register: data
+
+     - name: After VLAN configuration
+       debug:
+         msg:
+          - "VLANs: {{ data.ansible_facts.ansible_net_vlan_list }}"
