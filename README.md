@@ -12,7 +12,7 @@ Ansible version required 2.10+
 
 # How to use these playbooks
 * Clone the project 
-https://github.sec.samsung.net/SECA-DevOps/Network-automation.git
+https://github.com/m-1990/Network-automation.git
 
 Update your inventory file located at /etc/ansible/hosts, for example
 add the following lines at the end of hosts file
