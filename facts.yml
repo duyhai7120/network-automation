@@ -1,0 +1,34 @@
+---
+- name: gather hardware facts of Cisco and Juniper devices
+  hosts: all
+  gather_facts: no
+  tasks:
+  - name: look at some facts in nexus
+    nxos_facts:
+      gather_subset:
+        - hardware
+    when: ansible_network_os == 'nxos'
+
+
+  - name: show results
+    debug:
+      msg:
+        - "filesystems: {{ ansible_net_filesystems }}"
+        - "free mem MB: {{ ansible_net_memfree_mb }}"
+        - "mem total MB: {{ ansible_net_memtotal_mb }}"
+    when: ansible_network_os == 'nxos'
+
+
+  - name: look at some facts in junos
+    junos_facts:
+      gather_subset:
+        - hardware
+    when: ansible_network_os == 'junos'
+
+  - name: show results
+    debug:
+      msg:
+        - "free mem MB: {{ ansible_net_memfree_mb }}"
+        - "mem total MB: {{ ansible_net_memtotal_mb }}"
+
+    when: ansible_network_os == 'junos'
