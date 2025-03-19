@@ -1,4 +1,3 @@
----
 - name: config backup of network devices
   hosts: all
   gather_facts: no
@@ -7,26 +6,8 @@
     shell: "date +%Y%m%d-%H-%M-%S"
     register: timestamp
 
-  - name: backup nxos config
-    nxos_config:
-      backup: yes
-      backup_options:
-        filename: "running-config-{{ timestamp.stdout }}"
-        dir_path: "data/{{ inventory_hostname }}"
-    when: ansible_network_os == 'nxos'
-
-  - name: backup junos config
-    junos_config:
-      backup: yes
-      backup_options:
-        filename: "running-config-{{ timestamp.stdout }}"
-        dir_path: "data/{{ inventory_hostname }}"
-    when: ansible_network_os == 'junos'
-
-  - name: backup ios config
-    ios_config:
-      backup: yes
-      backup_options:
-        filename: "running-config-{{ timestamp.stdout }}"
-        dir_path: "data/{{ inventory_hostname }}"
+  - name: backup ios config to tftp
+    ios_command:
+      commands:
+        - "copy running-config tftp://192.168.1.15/{{ inventory_hostname }}-running-config-{{ timestamp.stdout }}"
     when: ansible_network_os == 'ios'
