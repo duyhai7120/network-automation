@@ -9,18 +9,24 @@
 
   - name: backup nxos config
     nxos_config:
-            backup: yes
-            backup_options:
-                    filename: "running-config-{{ timestamp.stdout }}"
-                    dir_path: "data/{{ inventory_hostname }}"
-
+      backup: yes
+      backup_options:
+        filename: "running-config-{{ timestamp.stdout }}"
+        dir_path: "data/{{ inventory_hostname }}"
     when: ansible_network_os == 'nxos'
-  - name: backup nxos config
+
+  - name: backup junos config
     junos_config:
-            backup: yes
-            backup_options:
-                    filename: "running-config-{{ timestamp.stdout }}"
-                    dir_path: "data/{{ inventory_hostname }}"
-
-
+      backup: yes
+      backup_options:
+        filename: "running-config-{{ timestamp.stdout }}"
+        dir_path: "data/{{ inventory_hostname }}"
     when: ansible_network_os == 'junos'
+
+  - name: backup ios config
+    ios_config:
+      backup: yes
+      backup_options:
+        filename: "running-config-{{ timestamp.stdout }}"
+        dir_path: "data/{{ inventory_hostname }}"
+    when: ansible_network_os == 'ios'
